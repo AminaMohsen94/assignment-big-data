@@ -1,0 +1,7 @@
+.git
+**/.ipynb_checkpoints
+**/__pycache__
+output
+screenshots
+source_notebooks
+*.zip
