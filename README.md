@@ -13,7 +13,7 @@ This project uses the supplied SMS Spam Collection CSV for preprocessing, text a
 supervised classification and K-Means. The runnable entry point is `notebook/analysis.ipynb` (saved with cleared outputs; the executed copy is `output/analysis_executed.ipynb`).
 The original teammate notebooks are retained in `source_notebooks/` for reference.
 
-Docker Hub repository: `ayman2287/bd-a1`
+Docker Hub repository: `aminamohsen/bd-a1`
 
 Release tag: `1.0`
 
@@ -235,7 +235,7 @@ Create another container with the same run command above whenever you want to re
 
 ## Publish the final image to Docker Hub
 
-Create a repository named `bd-a1` under Docker Hub account `ayman2287`.
+Create a repository named `bd-a1` under Docker Hub account `aminamohsen`.
 Use a public repository for easy teammate access, or give the teammate access if it is private.
 The source dataset's attribution is included below.
 
@@ -251,19 +251,19 @@ check, save/copy it to the host and rebuild/retest before release. Re-saving exe
 alone does not change the analysis code.
 
 ```powershell
-docker login --username ayman2287
-docker tag bd-a1:1.0 ayman2287/bd-a1:1.0
-docker push ayman2287/bd-a1:1.0
+docker login --username aminamohsen
+docker tag bd-a1:1.0 aminamohsen/bd-a1:1.0
+docker push aminamohsen/bd-a1:1.0
 ```
 
 Follow Docker's sign-in prompt on your own machine. Do not put credentials in this README,
 the Dockerfile or screenshots. Capture the successful push and the returned digest.
 
 ```powershell
-docker image inspect ayman2287/bd-a1:1.0 --format '{{json .RepoDigests}}' | Out-File -Encoding utf8 screenshots\published-digest.txt
+docker image inspect aminamohsen/bd-a1:1.0 --format '{{json .RepoDigests}}' | Out-File -Encoding utf8 screenshots\published-digest.txt
 ```
 
-The repository is [ayman2287/bd-a1](https://hub.docker.com/r/ayman2287/bd-a1), tag `1.0`;
+The repository is [aminamohsen/bd-a1](https://hub.docker.com/r/aminamohsen/bd-a1), tag `1.0`;
 this address is the intended publication location, not a claim it is already published.
 After pushing, replace the deferred publication status at the top with the actual date and digest.
 Do not overwrite this release tag after teammate verification; use `1.1` for subsequent code changes.
@@ -280,8 +280,8 @@ PowerShell commands for the teammate:
 ```powershell
 New-Item -ItemType Directory -Force "$env:USERPROFILE\Downloads\bd-a1-pull-test\output" | Out-Null
 Set-Location "$env:USERPROFILE\Downloads\bd-a1-pull-test"
-docker pull ayman2287/bd-a1:1.0
-docker run -d --name bd-a1-verify -p 127.0.0.1:8889:8888 --mount "type=bind,source=$($PWD.Path)\output,target=/home/jovyan/bd-a1/output" ayman2287/bd-a1:1.0
+docker pull aminamohsen/bd-a1:1.0
+docker run -d --name bd-a1-verify -p 127.0.0.1:8889:8888 --mount "type=bind,source=$($PWD.Path)\output,target=/home/jovyan/bd-a1/output" aminamohsen/bd-a1:1.0
 docker ps
 docker logs bd-a1-verify
 ```
